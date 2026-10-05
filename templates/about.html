@@ -3,9 +3,19 @@
 {% block title %}Sobre | Binhan{% endblock %}
 
 {% block content %}
-  <section>
+  <section class="page-section">
     <h2>Sobre</h2>
-    <p>Sou Binhan, mestrando em Ciência da Computação na UFSCar e pesquisador em OpenRAN e 5G. Meu trabalho combina telecomunicações, redes ópticas e software para entender como a infraestrutura de rede moderna funciona na prática.</p>
-    <p>Antes do mestrado, atuava no campo com FTTH/GPON, fusão óptica e testes com OTDR. Essa experiência me deu uma visão muito clara da camada física e das dificuldades reais de operação de redes.</p>
+    {% for paragraph in story %}
+      <p>{{ paragraph }}</p>
+    {% endfor %}
+
+    <div class="values-box">
+      <h3>Valores</h3>
+      <ul>
+        {% for value in values %}
+          <li>{{ value }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   </section>
 {% endblock %}
