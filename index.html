@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Binhan | Redes, OpenRAN e 5G — Portfolio Profissional</title>
+  <meta name="description" content="Mestrando em Ciência da Computação na UFSCar, pesquisando OpenRAN e 5G, com experiência prática em telecomunicações, redes ópticas e infraestrutura.">
+  <meta name="theme-color" content="#0b7a75">
+  <meta property="og:title" content="Binhan | Redes, OpenRAN e 5G">
+  <meta property="og:description" content="Pesquisador e desenvolvedor com foco em redes móveis abertas, 5G e telecomunicações.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://binhanfisana.github.io">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f6f8;
+      --bg-dark: #e8ecf0;
+      --ink: #0f2a3a;
+      --muted: #52697a;
+      --line: #c9d6de;
+      --accent: #0b7a75;
+      --accent-light: #1a9b93;
+      --spike: #b86e00;
+      --panel: #ffffff;
+      --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+      --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+      color: var(--ink);
+      font: 400 1.05rem/1.65 var(--body);
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover { color: var(--accent-light); }
+    a:focus-visible {
+      outline: 3px solid var(--spike);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    header.navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(243, 246, 248, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 1.2rem 0;
+      z-index: 999;
+      box-shadow: 0 2px 8px rgba(15, 42, 58, 0.08);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    nav a {
+      color: var(--ink);
+      position: relative;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .hero {
+      padding: 4rem 0 2rem;
+      background: linear-gradient(180deg, transparent 0%, rgba(11, 122, 117, 0.02) 100%);
+      position: relative;
+    }
+
+    .hero-content h1 {
+      font: 700 clamp(3rem, 9vw, 5.2rem)/1 var(--head);
+      margin: 0 0 1rem;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--ink), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .lead {
+      font-size: 1.2rem;
+      max-width: 42rem;
+      color: var(--muted);
+      margin: 0 0 2rem;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 4px 16px rgba(11, 122, 117, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(11, 122, 117, 0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .trace {
+      margin: 3rem 0 0;
+      width: 100%;
+    }
+
+    .trace svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(15, 42, 58, 0.06));
+    }
+
+    .trace .grid { stroke: var(--line); stroke-width: 1; }
+    .trace .line {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 0;
+    }
+
+    .trace .ev {
+      fill: var(--muted);
+      font: 500 13px var(--body);
+    }
+
+    .trace .dot { fill: var(--spike); }
+
+    .trace figcaption {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      font-style: italic;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .trace .line { animation: draw 3.2s ease-out 1 both; }
+    }
+
+    @keyframes draw {
+      from { stroke-dashoffset: 1; }
+      to { stroke-dashoffset: 0; }
+    }
+
+    section {
+      padding: 4rem 0 0;
+    }
+
+    h2 {
+      font: 700 2.2rem/1.1 var(--head);
+      margin: 0 0 0.5rem;
+      color: var(--ink);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--spike));
+      margin-top: 0.8rem;
+      border-radius: 2px;
+    }
+
+    h3 {
+      font: 700 1.15rem/1.3 var(--head);
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+
+    p {
+      max-width: 42rem;
+      margin: 0 0 1rem;
+    }
+
+    .skills-intro {
+      margin: 1.5rem 0 2rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem 2rem;
+      margin-top: 2rem;
+    }
+
+    .skill-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(15, 42, 58, 0.04);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(15, 42, 117, 0.1);
+      border-color: var(--accent);
+    }
+
+    .skill-card h3 {
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(11, 122, 117, 0.2);
+    }
+
+    .timeline {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .timeline-item {
+      background: var(--panel);
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(15, 42, 58, 0.04);
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      box-shadow: 0 4px 16px rgba(15, 42, 58, 0.08);
+      transform: translateX(4px);
+    }
+
+    .period {
+      display: inline-block;
+      font: 600 0.9rem var(--head);
+      color: var(--accent);
+      background: rgba(11, 122, 117, 0.08);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+    }
+
+    .timeline-item h3 {
+      margin: 0.4rem 0 0;
+      font-size: 1.15rem;
+    }
+
+    .timeline-company {
+      font-weight: 600;
+      color: var(--spike);
+      font-size: 0.95rem;
+      margin: 0.3rem 0 0.8rem;
+    }
+
+    .timeline-item p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .projects-list {
+      list-style: none;
+      margin: 2rem 0 0;
+      padding: 0;
+      display: grid;
+      gap: 1.2rem;
+    }
+
+    .project-item {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(15, 42, 58, 0.04);
+    }
+
+    .project-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 20px rgba(11, 122, 117, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font: 700 1.2rem var(--head);
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .project-item a:not(.btn) {
+      color: var(--accent);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      margin: 0.6rem 0 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem 0;
+      box-shadow: 0 8px 32px rgba(11, 122, 117, 0.25);
+    }
+
+    .contact-box h2 {
+      color: white;
+    }
+
+    .contact-box h2::after {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .contact-box p {
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 38rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.3rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .social-links a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 5rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 1.2rem; }
+      h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+      h2 { font-size: 1.8rem; }
+      nav { gap: 1.2rem; font-size: 0.9rem; }
+      .hero { padding: 2.5rem 0 1rem; }
+      .lead { font-size: 1.05rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .cta-group { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 1rem; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.5rem; }
+      nav { gap: 1rem; font-size: 0.85rem; }
+      .contact-box { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <nav aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#areas">Áreas</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Binhan</h1>
+        <p class="lead">Mestrando em Ciência da Computação na UFSCar. Pesquiso OpenRAN e 5G, com a experiência de quem já mediu fibra em campo.</p>
+        <div class="cta-group">
+          <a href="#contato" class="btn btn-primary">Vamos conversar</a>
+          <a href="https://github.com/Binhanfisana" target="_blank" rel="noreferrer" class="btn btn-secondary">Ver GitHub</a>
+        </div>
+      </div>
+
+      <figure class="trace" aria-label="Traço de OTDR com emendas e conectores">
+        <svg viewBox="0 0 900 230" role="img" aria-hidden="true">
+          <g class="grid">
+            <line x1="0" y1="215" x2="900" y2="215"/>
+            <line x1="0" y1="115" x2="900" y2="115" stroke-dasharray="4 6"/>
+            <line x1="0" y1="15" x2="900" y2="15" stroke-dasharray="4 6"/>
+          </g>
+          <path class="line" pathLength="1" d="M0,40 L150,60 L152,74 L330,104 L336,60 L340,118 L520,150 L523,162 L700,190 L706,150 L710,200 L900,205"/>
+          <circle class="dot" cx="152" cy="74" r="4"/><circle class="dot" cx="336" cy="60" r="4"/>
+          <circle class="dot" cx="523" cy="162" r="4"/><circle class="dot" cx="706" cy="150" r="4"/>
+          <text class="ev" x="162" y="96">emenda</text><text class="ev" x="348" y="52">conector</text>
+          <text class="ev" x="533" y="184">emenda</text><text class="ev" x="718" y="142">conector</text>
+        </svg>
+        <figcaption>Traço de OTDR: cada queda é uma emenda, cada pico é um conector. Antes do software, eu lia redes assim.</figcaption>
+      </figure>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre</h2>
+      <p>Trabalhei com FTTH/GPON, fusão óptica e testes com OTDR antes de entrar no mestrado. Hoje, no laboratório da UFSCar em Sorocaba, pesquiso redes móveis abertas (OpenRAN e 5G) em projetos feitos com parceiros do setor de telecom.</p>
+      <p>Gosto de entender a rede inteira: da camada física ao software que a controla e automatiza.</p>
+    </section>
+
+    <section id="areas">
+      <h2>Áreas de atuação</h2>
+      <p class="skills-intro">Experiência e conhecimento técnico em telecomunicações, redes ópticas e infraestrutura moderna:</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>📡 Redes móveis</h3>
+          <p>OpenRAN, 5G, arquiteturas abertas de acesso por rádio e padrões de rede móvel moderna.</p>
+          <div class="tech-list">
+            <span class="badge">OpenRAN</span>
+            <span class="badge">5G</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>🔗 Redes ópticas</h3>
+          <p>FTTH/GPON, fusão óptica, medições com OTDR, trabalho de campo e manutenção de infraestrutura.</p>
+          <div class="tech-list">
+            <span class="badge">FTTH</span>
+            <span class="badge">OTDR</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>⚙️ Software e infraestrutura</h3>
+          <p>Linux, Python, Git, Terraform, AWS e ferramentas para automação e implantação em cloud.</p>
+          <div class="tech-list">
+            <span class="badge">Python</span>
+            <span class="badge">AWS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia">
+      <h2>Experiência</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="period">2024 — Atual</span>
+          <h3>Mestrando em Ciência da Computação</h3>
+          <p class="timeline-company">UFSCar — Sorocaba</p>
+          <p>Pesquisa aplicada em redes móveis abertas e arquiteturas para redes 5G e OpenRAN. Trabalho colaborativo com parceiros da indústria de telecomunicações.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="period">2019 — 2024</span>
+          <h3>Profissional em redes ópticas e telecom</h3>
+          <p class="timeline-company">Operação e manutenção</p>
+          <p>Acompanhamento de FTTH/GPON, medições com OTDR, fusão óptica e testes de rede em campo. Experiência prática em implantação e troubleshooting de redes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Formação</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="period">2024 — Atual</span>
+          <h3>Mestrado em Ciência da Computação</h3>
+          <p class="timeline-company">Universidade Federal de São Carlos (UFSCar)</p>
+          <p>Linha de pesquisa em redes móveis, telecomunicações e infraestrutura inteligente. Foco em OpenRAN, 5G e arquiteturas abertas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="projetos">
+      <h2>Projetos</h2>
+      <ul class="projects-list">
+        <li class="project-item">
+          <div class="project-header">
+            <h3 class="project-title">
+              <a href="https://github.com/Binhanfisana/tfgoat-aws" target="_blank" rel="noreferrer">tfgoat-aws ↗</a>
+            </h3>
+          </div>
+          <p class="project-desc">Fork de estudo: infraestrutura AWS vulnerável em Terraform, desenvolvido para praticar segurança em cloud e aprender padrões de IaC (Infrastructure as Code).</p>
+        </li>
+        <li class="project-item">
+          <div class="project-header">
+            <h3 class="project-title">Pesquisa de mestrado</h3>
+          </div>
+          <p class="project-desc">Trabalho acadêmico em redes móveis e OpenRAN com foco em arquitetura 5G. Parte do trabalho é colaborativa e não pode ser publicada no momento, mas artigos e resultados serão divulgados em breve.</p>
+        </li>
+        <li class="project-item">
+          <div class="project-header">
+            <h3 class="project-title">Portfólio profissional</h3>
+          </div>
+          <p class="project-desc">Site pessoal para comunicação de perfil técnico, projetos e pesquisa. Desenvolvido com foco em presença profissional online, acessibilidade e performance.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="contato">
+      <div class="contact-box">
+        <h2>Vamos conversar</h2>
+        <p>Quer colaborar em projetos de redes, 5G, OpenRAN ou pesquisa? Tenho interesse em discussões técnicas e novas oportunidades.</p>
+        <div class="social-links">
+          <a href="https://github.com/Binhanfisana" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/SEU-USUARIO" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="http://lattes.cnpq.br/SEU-ID" target="_blank" rel="noreferrer">Lattes</a>
+          <a href="mailto:seu.email@exemplo.com">Email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Binhan · Sorocaba, SP · <a href="https://github.com/Binhanfisana/Binhanfisana.github.io" target="_blank" rel="noreferrer">Ver código fonte</a></p>
+    </div>
+  </footer>
+</body>
+</html>
