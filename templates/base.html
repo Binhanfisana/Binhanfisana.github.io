@@ -1,0 +1,33 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ page_title }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}Mestrando em Ciência da Computação na UFSCar, pesquisando OpenRAN e 5G, com experiência prática em telecomunicações.{% endblock %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <nav aria-label="Principal">
+          <a href="{% url 'home' %}#sobre">Sobre</a>
+          <a href="{% url 'home' %}#areas">Áreas</a>
+          <a href="{% url 'projects' %}">Projetos</a>
+          <a href="{% url 'contact' %}">Contato</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <div class="wrap">Binhan · Sorocaba, SP · Feito com Django</div>
+    </footer>
+  </body>
+</html>

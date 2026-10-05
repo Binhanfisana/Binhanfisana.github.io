@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Projetos | Binhan{% endblock %}
+
+{% block content %}
+  <section>
+    <h2>Projetos</h2>
+    <ul class="projects">
+      {% for project in projects %}
+        <li>
+          <strong>
+            {% if project.url and project.url != '#' %}
+              <a href="{{ project.url }}" target="_blank" rel="noreferrer">{{ project.title }}</a>
+            {% else %}
+              {{ project.title }}
+            {% endif %}
+          </strong>
+          <span>{{ project.description }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}

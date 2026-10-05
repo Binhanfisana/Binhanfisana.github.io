@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+  <div class="hero">
+    <h1>Binhan</h1>
+    <p class="lead">{{ hero_text }}</p>
+
+    <figure class="trace" aria-label="Gráfico de um traço de OTDR com emendas e conectores">
+      <svg viewBox="0 0 900 230" role="img" aria-hidden="true">
+        <g class="grid">
+          <line x1="0" y1="215" x2="900" y2="215"/>
+          <line x1="0" y1="115" x2="900" y2="115" stroke-dasharray="4 6"/>
+          <line x1="0" y1="15" x2="900" y2="15" stroke-dasharray="4 6"/>
+        </g>
+        <path class="line" pathLength="1" d="M0,40 L150,60 L152,74 L330,104 L336,60 L340,118 L520,150 L523,162 L700,190 L706,150 L710,200 L900,205"/>
+        <circle class="dot" cx="152" cy="74" r="4"/>
+        <circle class="dot" cx="336" cy="60" r="4"/>
+        <circle class="dot" cx="523" cy="162" r="4"/>
+        <circle class="dot" cx="706" cy="150" r="4"/>
+        <text class="ev" x="162" y="96">emenda</text>
+        <text class="ev" x="348" y="52">conector</text>
+        <text class="ev" x="533" y="184">emenda</text>
+        <text class="ev" x="718" y="142">conector</text>
+      </svg>
+      <figcaption>Traço de OTDR: cada queda é uma emenda, cada pico é um conector. Antes do software, eu lia redes assim.</figcaption>
+    </figure>
+  </div>
+
+  <section id="sobre">
+    <h2>Sobre</h2>
+    <p>Trabalhei com FTTH/GPON, fusão óptica e testes com OTDR antes de entrar no mestrado. Hoje, no laboratório da UFSCar em Sorocaba, pesquiso redes móveis abertas (OpenRAN e 5G) em projetos feitos com parceiros do setor de telecom.</p>
+    <p>Gosto de entender a rede inteira: da camada física ao software que a controla e automatiza.</p>
+  </section>
+
+  <section id="areas">
+    <h2>Áreas de atuação</h2>
+    <div class="skills">
+      {% for item in sections %}
+        <div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="projetos">
+    <h2>Projetos</h2>
+    <ul class="projects">
+      {% for project in projects %}
+        <li>
+          <strong>
+            {% if project.url != '#' %}
+              <a href="{{ project.url }}" target="_blank" rel="noreferrer">{{ project.title }}</a>
+            {% else %}
+              {{ project.title }}
+            {% endif %}
+          </strong>
+          <span>{{ project.description }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section id="contato" class="contact">
+    <h2>Contato</h2>
+    <p>Quer conversar sobre redes, 5G ou pesquisa? Escreva para mim.</p>
+    {% for link in contact_links %}
+      <a href="{{ link.url }}" target="_blank" rel="noreferrer">{{ link.label }}</a>
+    {% endfor %}
+  </section>
+{% endblock %}
