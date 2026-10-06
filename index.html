@@ -81,26 +81,32 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      min-width: 140px;
+      min-width: 120px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .profile-badge:hover {
+      transform: scale(1.05);
     }
 
     .profile-image-container {
       position: relative;
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
       margin-bottom: 0.8rem;
     }
 
     .profile-image {
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--accent), var(--accent-light));
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 48px;
+      font-size: 32px;
       font-weight: 700;
       box-shadow: 0 4px 16px rgba(11, 122, 117, 0.3);
       border: 3px solid white;
@@ -115,8 +121,36 @@
       border-radius: 50%;
     }
 
+    .profile-upload-hint {
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      background: var(--spike);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 700;
+      border: 2px solid white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .profile-badge:hover .profile-upload-hint {
+      opacity: 1;
+    }
+
+    #imageUpload {
+      display: none;
+    }
+
     .profile-name {
-      font: 700 0.95rem var(--head);
+      font: 700 0.85rem var(--head);
       color: var(--ink);
       text-align: center;
       margin: 0;
@@ -124,7 +158,7 @@
     }
 
     .profile-title {
-      font: 500 0.8rem var(--body);
+      font: 500 0.75rem var(--body);
       color: var(--spike);
       text-align: center;
       margin: 0;
@@ -536,22 +570,22 @@
       }
 
       .profile-image {
-        width: 85px;
-        height: 85px;
-        font-size: 40px;
+        width: 60px;
+        height: 60px;
+        font-size: 28px;
       }
 
       .profile-image-container {
-        width: 85px;
-        height: 85px;
+        width: 60px;
+        height: 60px;
       }
 
       .profile-name {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
 
       .profile-title {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
       }
 
       nav {
@@ -575,17 +609,6 @@
       h2 { font-size: 1.5rem; }
       nav { gap: 1rem; font-size: 0.85rem; }
       .contact-box { padding: 2rem 1.5rem; }
-
-      .profile-image {
-        width: 70px;
-        height: 70px;
-        font-size: 32px;
-      }
-
-      .profile-image-container {
-        width: 70px;
-        height: 70px;
-      }
     }
   </style>
 </head>
@@ -593,13 +616,15 @@
   <header class="navbar">
     <div class="container">
       <div class="navbar-content">
-        <div class="profile-badge">
+        <div class="profile-badge" onclick="document.getElementById('imageUpload').click();" title="Clique para alterar foto">
           <div class="profile-image-container">
             <div class="profile-image" id="profileImage">B</div>
+            <div class="profile-upload-hint">+</div>
           </div>
           <p class="profile-name">Binhanfisana João Ialá</p>
           <p class="profile-title">Engenheiro de Computação</p>
         </div>
+        <input type="file" id="imageUpload" accept="image/*" />
         <nav aria-label="Navegação principal">
           <a href="#sobre">Sobre</a>
           <a href="#areas">Áreas</a>
@@ -772,8 +797,43 @@
 
   <footer>
     <div class="container">
-      <p>Binhanfisana João Ialá | Bissau, Guiné-Bissau</p>
+      <p>Binhanfisana João Ialá | Bissau, Guiné-Bissau · <a href="https://github.com/Binhanfisana/Binhanfisana.github.io" target="_blank" rel="noreferrer">Ver código fonte</a></p>
     </div>
   </footer>
+
+  <script>
+    // Upload de imagem no perfil
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = document.createElement('img');
+          img.src = event.target.result;
+          
+          const profileImageDiv = document.getElementById('profileImage');
+          profileImageDiv.innerHTML = '';
+          profileImageDiv.appendChild(img);
+          
+          // Salvar a imagem no localStorage do navegador
+          localStorage.setItem('profileImage', event.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Carregar imagem salva ao recarregar a página
+    window.addEventListener('load', function() {
+      const savedImage = localStorage.getItem('profileImage');
+      if (savedImage) {
+        const img = document.createElement('img');
+        img.src = savedImage;
+        
+        const profileImageDiv = document.getElementById('profileImage');
+        profileImageDiv.innerHTML = '';
+        profileImageDiv.appendChild(img);
+      }
+    });
+  </script>
 </body>
 </html>
